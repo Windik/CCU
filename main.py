@@ -2,6 +2,19 @@ import openpyxl
 import sqlite3
 # from openpyxl import load_workbook
 
+def dateChanger(source_string):
+	new_string = source_string
+	if "datetime.datetime(" in new_string:
+		while "datetime.datetime(" in new_string:
+			# Находим дату и разбиваем на составляющие
+			lol = new_string[(new_string.find("datetime.datetime(")+len("datetime.datetime(")):new_string.find(")")].split(', ') # "datetime.datetime(".__sizeof__()
+			# Формируем новую дату
+			new_date_format = lol[2] + "-" + lol[1] + "-" + lol[0]
+			# Модифицируем строку
+			new_string = new_string[:new_string.find("datetime.datetime(")] + new_date_format + new_string[new_string.find("),")+1:]
+	print(new_string)
+		
+
 
 # открываем файл excel
 wb = openpyxl.load_workbook(filename = 'contr.xlsx')
@@ -10,7 +23,7 @@ wb = openpyxl.load_workbook(filename = 'contr.xlsx')
 
 # получаем имена страниц в виде списка
 pages = wb.sheetnames
-print(pages)
+# print(pages)
 
 # Worksheet
 one_page = wb[pages[0]]
@@ -23,7 +36,7 @@ temp_string_index = ''
 
 temp_list = []
 full_dict = dict()
-for row in range(2,30):
+for row in range(2,6):
 	for i in 'CDEFGJP':
 		temp_string_index = i + str(row)
 		temp_list.append(one_page[temp_string_index].value)
@@ -53,8 +66,8 @@ for i in full_dict:
 	# Вырезаем часть с датой, разбиваем ее по запятой
 	lol = list_data[(list_data.find("datetime.datetime(")+len("datetime.datetime(")):list_data.find(")")].split(', ') # "datetime.datetime(".__sizeof__()
 	# 
-	part_one = list_data[:list_data.find("datetime.datetime(")+len("datetime.datetime(")]
-	print("lol", lol[2] + "-" + lol[1] + "-" + lol[0])
+	
+	dateChanger(list_data)
 	#list_data = list_data.replace("datetime.datetime(", "")
 	#list_data = list_data.replace(")","")
 	#while '(' in list_data:
