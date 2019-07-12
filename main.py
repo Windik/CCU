@@ -66,6 +66,9 @@ for i in range(2,5):
 	# print(self.query_str)
 	#cursor.execute(query_str)
 	pass
+
+# Этот комментарий был добавлен и отправлен на сервер
+
 #connect.commit()
 
 
