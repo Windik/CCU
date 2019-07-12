@@ -61,6 +61,7 @@ for i in full_dict:
 
 
 
+<<<<<<< HEAD
 
 for i in range(2,5):
 
@@ -71,4 +72,7 @@ for i in range(2,5):
 #connect.commit()
 
 
+=======
+# В конце мы будем писать в лог свои действия
+>>>>>>> master
 
