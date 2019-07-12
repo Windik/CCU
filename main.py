@@ -3,6 +3,7 @@ import sqlite3
 # from openpyxl import load_workbook
 
 def dateChanger(source_string):
+	''' Функция преобразоваения даты '''
 	new_string = source_string
 	if "datetime.datetime(" in new_string:
 		while "datetime.datetime(" in new_string:
@@ -23,36 +24,24 @@ wb = openpyxl.load_workbook(filename = 'contr.xlsx')
 
 # получаем имена страниц в виде списка
 pages = wb.sheetnames
-# print(pages)
 
-# Worksheet
+# берем первую страницу
 one_page = wb[pages[0]]
 temp_string_index = ''
-# Перебор строк
-'''for i in range(2,19):
-	temp_string_index = 'D' + str(i)
-	print(one_page[temp_string_index].value)
-'''
 
 temp_list = []
+# Храним наши значения в словаре
 full_dict = dict()
+# Перебираем нужное нам количество строк, опуская строки заголовков
 for row in range(2,6):
+	# Перебираем те столбцы, данные из которых нас интересуют
 	for i in 'CDEFGJP':
 		temp_string_index = i + str(row)
 		temp_list.append(one_page[temp_string_index].value)
+	# Добавляем ключ-значение
 	full_dict[row] = temp_list
+	# Затираем временное значение
 	temp_list = []
-
-for i in range(2,30):
-	pass
-	#print(full_dict[i])
-		# print(temp_string_index, one_page[temp_string_index].value)
-
-#print(str(full_dict))
-
-test_file = open('data.txt','w')
-test_file.write(str(full_dict))
-test_file.close()
 
 connect = sqlite3.connect("YourDataBase.dbl")
 cursor = connect.cursor()
@@ -66,25 +55,18 @@ for i in full_dict:
 	# Вырезаем часть с датой, разбиваем ее по запятой
 	lol = list_data[(list_data.find("datetime.datetime(")+len("datetime.datetime(")):list_data.find(")")].split(', ') # "datetime.datetime(".__sizeof__()
 	# 
-	
+	# Пока просто выводим данные
 	dateChanger(list_data)
-	#list_data = list_data.replace("datetime.datetime(", "")
-	#list_data = list_data.replace(")","")
-	#while '(' in list_data:
-	#	list_data = list_data # [list_data.find('(')+1:list_data.find(')')] + list_data[list_data.find(')')+1:-1]
-	#print(list_data)
-	print()
+
 
 
 for i in range(2,5):
 
-	#query_str = """INSERT INTO organisations VALUES (NULL, """ + data + """)"""
+	# query_str = """INSERT INTO organisations VALUES (NULL, """ + data + """)"""
 	# print(self.query_str)
 	#cursor.execute(query_str)
 	pass
 #connect.commit()
 
-#for i in range(0,19):
-#	print(page['A'+str(i)].value)
 
 
