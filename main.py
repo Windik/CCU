@@ -1,6 +1,7 @@
 import openpyxl
 import sqlite3
-# from openpyxl import load_workbook
+
+import DbConnect as DC
 
 def dateChanger(source_string):
 	''' Функция преобразоваения даты '''
@@ -57,6 +58,7 @@ for i in full_dict:
 	# 
 	# Пока просто выводим данные
 	dateChanger(list_data)
+
 
 
 
