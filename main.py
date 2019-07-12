@@ -62,13 +62,17 @@ for i in full_dict:
 
 
 
-for i in range(2,5):
-
-	# query_str = """INSERT INTO organisations VALUES (NULL, """ + data + """)"""
-	# print(self.query_str)
-	#cursor.execute(query_str)
-	pass
-#connect.commit()
 
 
+
+
+
+
+
+
+
+
+
+
+# В конце мы будем писать в лог свои действия
 
